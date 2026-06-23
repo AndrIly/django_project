@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+DEBUG=os.environ.get("DJANGO_DEBUG", "0") == "1"
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

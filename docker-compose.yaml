@@ -11,6 +11,8 @@ services:
       - db_data:/app/db_data
 
   gunicorn:
+    environment:
+      - DJANGO_DEBUG=1
     build:
       context: .
       dockerfile: Dockerfile
