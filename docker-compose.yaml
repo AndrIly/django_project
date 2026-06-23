@@ -7,15 +7,21 @@ services:
       - migrate
 
     restart: "no"
+    volumes:
+      - db_data:/app/db_data
 
   gunicorn:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000 --access-logfile -
     ports:
       - "8000:8000"
     restart: "always"
     depends_on:
       migrate:
           condition: service_completed_successfully
+    volumes:
+      - db_data:/app/db_data
+volumes:
+  db_data:
